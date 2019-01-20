@@ -11,6 +11,13 @@ public:
 	byte* enterCmdMode(byte[]);
 
 	byte* getFirmwareVersion(byte[]);
+	
+	byte* readTemp(byte[]);
+	
+	byte* setMaxPower(byte[],int newPower);
+	
+	byte* EEPROMRead(byte[],int,int);
 
+	byte* EEPROMWrite(byte[],int,int,int);
 };
 #endif

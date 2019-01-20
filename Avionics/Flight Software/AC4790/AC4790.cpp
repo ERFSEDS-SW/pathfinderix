@@ -46,17 +46,104 @@ byte* AC4790::getFirmwareVersion(byte dataRec[])
   Serial3.write(statusReq, 3);
   delay(500);
   //Read returned bytes from transceiver
-  if(Serial3.available()>0){
-    incomingBytes = Serial3.readBytes(dataRec,3);
-    //Find and display returned firmware version
-    for( int i = 0; i<3; i++)
-    {
-      Serial.println(dataRec[i]);
-    }
-    delay(500);
-    }
-    return dataRec;
+  if(Serial3.available()>0)
+	{
+		incomingBytes = Serial3.readBytes(dataRec,3);
+		//Find and display returned firmware version
+		for( int i = 0; i<3; i++)
+			{
+			Serial.println(dataRec[i]);
+			}
+		delay(500);
+	}
+	return dataRec;
 }
 
 
 //--------------------------
+
+byte* AC4790::readTemp(byte dataTemp[])
+{
+	byte tempByte[2] = {0xCC, 0xA4};
+	byte tempReadBytes;
+	//-----------------
+	Serial3.write(tempByte, 2);
+	delay(500);
+	//Read returned bytes from transceiver
+	if(Serial3.available()>0){
+		tempReadBytes = Serial3.readBytes(dataTemp,2);
+		//Find and display returned firmware version
+		for( int i = 0; i<2; i++)
+		{
+			Serial.println(dataTemp[i]);
+		}
+		delay(500);
+    }
+    return dataTemp;
+}
+
+
+//----------------------------
+byte* AC4790::setMaxPower(byte confirmPwr[],int newPower)
+{
+	byte powerByte[3] = {0xCC,0x25,newPower};
+	byte returnPwr;
+	//-------------
+	Serial3.write(powerByte, 3);
+	delay(500);
+	//Read returned bytes
+	if(Serial3.available()>0)
+	{
+		returnPwr = Serial3.readyBytes(confirmPwr,2);
+		for(int i = 0; i<2; i++)
+		{
+			Serial.println(confirmPwr[i]);
+		}
+		delay(500);
+	}
+	return confirmPwr;
+}
+
+//----------------------------
+
+byte* AC4790::EEPROMRead(byte confirmRead[],int StartAddressRead,int LengthRead)
+{
+	byte readCmd[4] = {0xCC,0xC0,StartAddressRead,LengthRead};
+	byte returnRead;
+	//--------------
+	Serial3.write(readCmd, 4);
+	delay(500);
+	//Read returned Bytes
+	if(Serial3.available()>0)
+	{
+		returnRead = Serial3.readBytes(confirmRead,4);
+		for(int i = 0; i<4; i++)
+		{
+			Serial.println(confirmRead[i]);
+		}
+		delay(500);
+	}
+	return confirmRead;
+}
+
+//------------------------------------------
+
+byte* AC4790::EEPROMWrite(byte confirmWrite[],int StartAddressWrite,int LengthWrite,int WriteData)
+{
+	byte WriteCmd[5] = {0xCC,0xC1,StartAddressWrite,LengthWrite,WriteData};
+	byte returnWrite;
+	//--------------
+	Serial3.write(WriteCmd, 4);
+	delay(500);
+	//Read returned Bytes
+	if(Serial3.available()>0)
+	{
+		returnWrite = Serial3.readBytes(confirmWrite,4);
+		for(int i = 0; i<4; i++)
+		{
+			Serial.println(confirmWrite[i]);
+		}
+		delay(500);
+	}
+	return confirmWrite;
+}
