@@ -6,18 +6,18 @@
 class AC4790
 {
 
-public:
+	public:
 	
-	byte* enterCmdMode(byte[]);
+		byte* enterCmdMode(byte[]);
 
-	byte* getFirmwareVersion(byte[]);
+		byte* getFirmwareVersion(byte[]);
 	
-	byte* readTemp(byte[]);
+		byte* readTemp(byte[]);
 	
-	byte* setMaxPower(byte[],int newPower);
+		byte* setMaxPower(byte[],int newPower);
 	
-	byte* EEPROMRead(byte[],int,int);
+		byte* EEPROMRead(byte[],int,int);
 
-	byte* EEPROMWrite(byte[],int,int,int);
+		byte* EEPROMWrite(byte[],int,int,int);
 };
 #endif

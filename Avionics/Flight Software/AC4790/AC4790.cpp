@@ -133,7 +133,7 @@ byte* AC4790::EEPROMWrite(byte confirmWrite[],int StartAddressWrite,int LengthWr
 	byte WriteCmd[5] = {0xCC,0xC1,StartAddressWrite,LengthWrite,WriteData};
 	byte returnWrite;
 	//--------------
-	Serial3.write(WriteCmd, 4);
+	Serial3.write(WriteCmd, 5);
 	delay(500);
 	//Read returned Bytes
 	if(Serial3.available()>0)
