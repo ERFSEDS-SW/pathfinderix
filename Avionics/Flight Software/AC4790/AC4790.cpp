@@ -138,8 +138,8 @@ byte* AC4790::EEPROMWrite(byte confirmWrite[],int StartAddressWrite,int LengthWr
 	//Read returned Bytes
 	if(Serial3.available()>0)
 	{
-		returnWrite = Serial3.readBytes(confirmWrite,4);
-		for(int i = 0; i<4; i++)
+		returnWrite = Serial3.readBytes(confirmWrite,3);
+		for(int i = 0; i<3; i++)
 		{
 			Serial.println(confirmWrite[i]);
 		}
