@@ -14,7 +14,7 @@ class AC4790
 	
 		byte* readTemp(byte[]);
 	
-		byte* setMaxPower(byte[],int newPower);
+		byte* setMaxPower(byte[],int);
 	
 		byte* EEPROMRead(byte[],int,int);
 
