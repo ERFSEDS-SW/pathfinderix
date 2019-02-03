@@ -94,7 +94,7 @@ byte* AC4790::setMaxPower(byte confirmPwr[],int newPower)
 	//Read returned bytes
 	if(Serial3.available()>0)
 	{
-		returnPwr = Serial3.readyBytes(confirmPwr,2);
+		returnPwr = Serial3.readBytes(confirmPwr,2);
 		for(int i = 0; i<2; i++)
 		{
 			Serial.println(confirmPwr[i]);
