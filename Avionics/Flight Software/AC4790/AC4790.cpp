@@ -52,7 +52,11 @@ byte* AC4790::getFirmwareVersion(byte dataRec[])
 		//Find and display returned firmware version
 		for( int i = 0; i<3; i++)
 			{
+			if (i == 1){
+				Serial.print("Firmware Version: ");
+			}	
 			Serial.println(dataRec[i]);
+			
 			}
 		delay(500);
 	}
@@ -75,6 +79,9 @@ byte* AC4790::readTemp(byte dataTemp[])
 		//Find and display returned firmware version
 		for( int i = 0; i<2; i++)
 		{
+			if (i == 1){
+				Serial.print("Temperature (°C): ");
+			}
 			Serial.println(dataTemp[i]);
 		}
 		delay(500);
@@ -84,7 +91,7 @@ byte* AC4790::readTemp(byte dataTemp[])
 
 
 //----------------------------
-byte* AC4790::setMaxPower(byte confirmPwr[],int newPower)
+byte* AC4790::setMaxPower(byte confirmPwr[],byte newPower[])
 {
 	byte powerByte[3] = {0xCC,0x25,newPower};
 	byte returnPwr;
@@ -97,6 +104,9 @@ byte* AC4790::setMaxPower(byte confirmPwr[],int newPower)
 		returnPwr = Serial3.readBytes(confirmPwr,2);
 		for(int i = 0; i<2; i++)
 		{
+			if(i == 1){
+				Serial.print("Max. Power: ");
+			}
 			Serial.println(confirmPwr[i]);
 		}
 		delay(500);
@@ -106,7 +116,7 @@ byte* AC4790::setMaxPower(byte confirmPwr[],int newPower)
 
 //----------------------------
 
-byte* AC4790::EEPROMRead(byte confirmRead[],int StartAddressRead,int LengthRead)
+byte* AC4790::EEPROMRead(byte confirmRead[],byte StartAddressRead[],byte LengthRead[])
 {
 	byte readCmd[4] = {0xCC,0xC0,StartAddressRead,LengthRead};
 	byte returnRead;
@@ -119,6 +129,15 @@ byte* AC4790::EEPROMRead(byte confirmRead[],int StartAddressRead,int LengthRead)
 		returnRead = Serial3.readBytes(confirmRead,4);
 		for(int i = 0; i<4; i++)
 		{
+			if(i == 1){
+				Serial.print("Starting Address: ");
+			}
+			else if(i == 2){
+				Serial.print("Length: ");
+			}
+			else if(i == 3){
+				Serial.print("Data: ");
+			}
 			Serial.println(confirmRead[i]);
 		}
 		delay(500);
@@ -128,7 +147,7 @@ byte* AC4790::EEPROMRead(byte confirmRead[],int StartAddressRead,int LengthRead)
 
 //------------------------------------------
 
-byte* AC4790::EEPROMWrite(byte confirmWrite[],int StartAddressWrite,int LengthWrite,int WriteData)
+byte* AC4790::EEPROMWrite(byte confirmWrite[],byte StartAddressWrite[],byte LengthWrite[],byte WriteData[])
 {
 	byte WriteCmd[5] = {0xCC,0xC1,StartAddressWrite,LengthWrite,WriteData};
 	byte returnWrite;
@@ -141,6 +160,15 @@ byte* AC4790::EEPROMWrite(byte confirmWrite[],int StartAddressWrite,int LengthWr
 		returnWrite = Serial3.readBytes(confirmWrite,3);
 		for(int i = 0; i<3; i++)
 		{
+			if(i == 0){
+				Serial.print("Starting Address: ");
+			}
+			else if(i == 1){
+				Serial.print("Length: ");
+			}
+			else if(i == 2){
+				Serial.print("Data Written: ");
+			}
 			Serial.println(confirmWrite[i]);
 		}
 		delay(500);

@@ -14,10 +14,10 @@ class AC4790
 	
 		byte* readTemp(byte[]);
 	
-		byte* setMaxPower(byte[],int);
+		byte* setMaxPower(byte[],byte[]);
 	
-		byte* EEPROMRead(byte[],int,int);
+		byte* EEPROMRead(byte[],byte[],byte[]);
 
-		byte* EEPROMWrite(byte[],int,int,int);
+		byte* EEPROMWrite(byte[],byte[],byte[],byte[]);
 };
 #endif
